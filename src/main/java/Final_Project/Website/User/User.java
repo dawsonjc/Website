@@ -1,19 +1,32 @@
 package Final_Project.Website.User;
 
+import org.springframework.web.bind.annotation.RestController;
+
+import java.sql.*;
+
 public class User {
     private String First_Name;
     private String Last_Name;
     private String Password;
     private String Username;
     private String Email;
-    public User() {}
-    public User(String first_Name, String last_Name, String email, String username, String password) {
+
+    public void setFirst_Name(String first_Name) {
         this.First_Name = first_Name;
+    }
+    public void setLast_Name(String last_Name) {
         this.Last_Name = last_Name;
-        this.Email = email;
-        this.Username = username;
+    }
+    public void setPassword(String password) {
         this.Password = password;
     }
+    public void setUsername(String username) {
+        this.Username = username;
+    }
+    public void setEmail(String email) {
+        this.Email = email;
+    }
+
     public String getFirst_Name() {
         return this.First_Name;
     }
@@ -28,5 +41,11 @@ public class User {
     }
     public String getEmail() {
         return this.Email;
+    }
+
+    public static ResultSet getUserFromServer(Connection conn, String SQL) throws SQLException {
+        Statement statement = conn.createStatement();
+        conn.close();
+        return statement.executeQuery(SQL);
     }
 }

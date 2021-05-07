@@ -1,15 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://ww.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Login</title>
+    <style>
+        .inputs {
+            padding: 10px;
+        }
+        .login_Box {
+            width:300px;
+            height:300px;
+            position:fixed;
+            margin-left:-150px; /* half of width */
+            margin-top:-150px;  /* half of height */
+            top:50%;
+            left:50%;
+        }
+    </style>
 </head>
 <body>
-<form method="POST">
-    <label for="username">Username</label>
-    <input id="username" placeholder="Username">
-    <label for="password">Password</label>
-    <input id="password" type="password" placeholder="password">
-</form>
+<table border="1" class="login_Box">
+    <tbody>
+        <tr>
+            <td>
+                <form method="POST" th:action="@{/}" th:object="${User}">
+                    <div class="inputs">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" placeholder="Username" th:field="*{Username}">
+                    </div>
+                    <div class="inputs">
+                    <label for="password">Password</label>
+                    <input id="password" type="password" placeholder="password" th:field="*{Password}"></div>
+                    <div align="right"><button type="submit">Log In</button></div>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+
+</table>
+
 </body>
 </html>
