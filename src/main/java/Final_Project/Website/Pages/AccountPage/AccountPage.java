@@ -2,19 +2,42 @@ package Final_Project.Website.Pages.AccountPage;
 
 import Final_Project.Website.User.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 
 @Controller
 public class AccountPage {
-    User user;
+    private User user;
+    private HashMap<String, String> valid_User = new HashMap<>() {
+        {
+            put("root", "password");
+        }
+    };
 
-    @GetMapping(value = "/Account")
-    public String Account_Page(@RequestParam(value = "User") User user1) {
-        System.out.println("redirected successfully");
+
+    @PostMapping(value="/login")
+    public String Log_In(@ModelAttribute("User") User user1) {
+        // implement a login System
+        if(!(user1.getUsername().equals("root") &&
+                this.valid_User.get("root").equals(user1.getPassword()))) {
+          return "redirect:/";
+        }
+
+        // set as class variable
         this.user = user1;
-        System.out.println("user created successfully");
+        return "redirect:/Account";
+    }
+
+    @RequestMapping(value="/Account")
+    public String Account_Page() {
+        System.out.println(this.user);
         return "Account";
+    }
+    
+    @GetMapping(value="/ping_Server")
+    public String test() {
+        System.out.println("The server has been pinged");
+        return "redirect:/Account";
     }
 }

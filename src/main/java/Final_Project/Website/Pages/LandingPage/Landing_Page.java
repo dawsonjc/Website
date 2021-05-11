@@ -7,18 +7,12 @@ import Final_Project.Website.User.User;
 
 @Controller
 public class Landing_Page {
+
     @GetMapping(value = "/")
-    public String index(Model model) {
+    public String Login_Form(Model model) {
+        System.out.println("Login Form called");
         User user = new User();
         model.addAttribute("User", user);
         return "index";
-    }
-
-    @PostMapping(value="/")
-    public String Log_In(@ModelAttribute("User") User user) {
-        // implement a login System
-        System.out.println(user.getUsername());
-        System.out.println(user.getPassword());
-        return "redirect:/Account";
     }
 }
