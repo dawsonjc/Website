@@ -17,13 +17,16 @@
             left:50%;
         }
     </style>
+    <script>
+        if()
+    </script>
 </head>
 <body>
 <table border="1" class="login_Box">
     <tbody>
         <tr>
             <td>
-                <form method="POST" th:action="@{/}" th:object="${User}">
+                <form method="POST" th:action="@{/login}" th:object="${User}">
                     <div class="inputs">
                         <label for="username">Username</label>
                         <input type="text" id="username" placeholder="Username" th:field="*{Username}">
