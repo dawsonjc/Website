@@ -2,7 +2,7 @@
 <html xmlns:th="http://ww.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Dawson's Masks Status - Login</title>
     <style>
         .inputs {
             padding: 10px;
@@ -31,7 +31,7 @@
     <tbody>
         <tr>
             <td>
-                <form method="POST" th:action="@{/login}" th:object="${User}">
+                <form method="POST" th:action="@{/Login/user}" th:object="${User}">
                     <div class="inputs">
                         <label for="username">Username</label>
                         <input type="text" id="username" placeholder="Username" th:field="*{Username}">
@@ -40,6 +40,9 @@
                     <label for="password">Password</label>
                     <input id="password" type="password" placeholder="password" th:field="*{Password}"></div>
                     <div align="right"><button type="submit">Log In</button></div>
+                </form>
+                <form method="POST" th:action="@{/signUp}">
+                    <div align="right"><button type="submit">Sign up</button></div>
                 </form>
             </td>
         </tr>

@@ -1,6 +1,6 @@
 package Final_Project.Website.Pages.AccountPage;
 
-import Final_Project.Website.User.User;
+import Final_Project.Website.Object.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,14 +9,14 @@ import java.util.HashMap;
 @Controller
 public class AccountPage {
     private User user;
-    private HashMap<String, String> valid_User = new HashMap<>() {
+    private final HashMap<String, String> valid_User = new HashMap<>() {
         {
             put("root", "password");
         }
     };
 
 
-    @PostMapping(value="/login")
+    @PostMapping(value="/Login/user")
     public String Log_In(@ModelAttribute("User") User user1) {
         // implement a login System
         if(!(user1.getUsername().equals("root") &&
@@ -26,7 +26,7 @@ public class AccountPage {
 
         // set as class variable
         this.user = user1;
-        return "redirect:/Account";
+        return "redirect:/locations";
     }
 
     @RequestMapping(value="/Account")
