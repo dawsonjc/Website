@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://ww.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dawson's Masks Status</title>
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+</head>
+<body>
+<button type="button"><a href="/locations/newLocation">New Location</a></button>
+<table class="table table-bordered" style="width:100%;">
+    <thead>
+        <tr>
+            <td>Logo</td>
+            <td>Name</td>
+            <td>Status</td>
+            <td>Longitude, Latitude</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="{location : Locations.next()}">
+            <td></td>
+            <td th:text="${location.getString(2)}">status</td>
+            <td th:text="${location.getString(1)}">name</td>
+            <td th:text="${location.getString(3)}, ${location.getString(4)}"></td>
+            <!--<td>Google map</td>-->
+        </tr>
+    </tbody>
+
+</table>
+</body>
+</html>
