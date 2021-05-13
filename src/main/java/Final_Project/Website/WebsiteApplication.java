@@ -14,7 +14,6 @@ import java.util.Random;
 
 @SpringBootApplication
 public class WebsiteApplication {
-	public static Connection connection;
 	public static void main(String[] args) {
 
 		// for future implementation
@@ -22,7 +21,6 @@ public class WebsiteApplication {
 		String username = "root";
 		String password = "password";
 		try(Connection conn = DriverManager.getConnection(url, username, password)) {
-			connection = DriverManager.getConnection(url, username, password);
 			System.out.println("Successful Connection");
 		} catch (SQLException e) {
 			System.out.println("MySQL server has not been implemented yet");

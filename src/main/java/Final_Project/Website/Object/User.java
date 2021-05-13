@@ -1,5 +1,6 @@
 package Final_Project.Website.Object;
 
+
 import java.sql.*;
 
 public class User {
@@ -9,7 +10,7 @@ public class User {
     private String Password;
     private String Username;
     private String Email;
-    private String Level;
+    private String Type;
 
     public void setId(int id) {
         this.Id = id;
@@ -29,8 +30,8 @@ public class User {
     public void setEmail(String email) {
         this.Email = email;
     }
-    public void setLevel(String level) {
-        this.Level = level;
+    public void setType(String type) {
+        this.Type = type;
     }
 
     public int getId() {
@@ -51,8 +52,8 @@ public class User {
     public String getEmail() {
         return this.Email;
     }
-    public String getLevel() {
-        return this.Level;
+    public String getType() {
+        return this.Type;
     }
 
     public static ResultSet getUsersFromServer(Connection conn, String SQL) {

@@ -7,12 +7,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import Final_Project.Website.Object.User;
 import java.sql.*;
+
 @Controller
 public class Landing_Page {
 
     @RequestMapping(value = "/")
     public String Table(Model model) {
-        model.addAttribute("Locations", User.getUsersFromServer(WebsiteApplication.connection, "SELECT * FROM Users"));
+        String url = "jdbc:mysql://localhost:3306/clients";
+        String username = "root";
+        String password = "password";
+        try(Connection conn = DriverManager.getConnection(url, username, password)) {
+            System.out.println("Successful Connection");
+            model.addAttribute("Locations", User.getUsersFromServer(conn, "SELECT * FROM Users"));
+        } catch (SQLException e) {
+            System.out.println("MySQL server has not been implemented yet");
+        }
+
         return "locations";
     }
 
