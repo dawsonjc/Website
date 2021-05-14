@@ -7,6 +7,7 @@ public class Location {
     private int LocationId;
     private String Location_Name;
     private String Status;
+    private String Location_Status;
     private float Latitude;
     private float Longitude;
     public void setId(int locationId) {
@@ -17,6 +18,9 @@ public class Location {
     }
     public void setStatus(String status) {
         this.Status = status;
+    }
+    public void setLocation_Status(String location_Status) {
+        this.Location_Status = location_Status;
     }
     public void setLatitude(float latitude) {
         this.Latitude = latitude;
@@ -34,6 +38,9 @@ public class Location {
     public String getStatus() {
         return this.Status;
     }
+    public String getLocation_Status() {
+        return this.Location_Status;
+    }
     public float getLatitude() {
         return this.Latitude;
     }
@@ -45,8 +52,9 @@ public class Location {
         Location current_User = new Location();
         current_User.Location_Name = info.getString(2);
         current_User.Status = info.getString(3);
-        current_User.Latitude = info.getFloat(4);
-        current_User.Longitude = info.getFloat(5);
+        current_User.Location_Status = info.getString(4);
+        current_User.Latitude = info.getFloat(5);
+        current_User.Longitude = info.getFloat(6);
         return current_User;
     }
 }

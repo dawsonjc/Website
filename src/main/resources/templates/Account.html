@@ -5,8 +5,13 @@
     <title>Dawson's Masks Status - Account</title>
 </head>
 <body>
-<form th:action="@{ping_Server}">
-    <button name="ping_server">Ping Server</button>
+<p th:text="${User.getFirst_Name()} ${User.getLast_Name()}"></p>
+<p th:text="${User.getEmail()}"></p>
+<p th:text="${User.getUsername()}"></p>
+<p th:text="${User.getPassword()}"></p>
+<form action="POST" >
+
+
 </form>
 
 </body>

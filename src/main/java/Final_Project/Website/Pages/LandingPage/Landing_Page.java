@@ -43,6 +43,4 @@ public class Landing_Page {
         model.addAttribute("Location", location);
         return "New_Location";
     }
-
-
 }

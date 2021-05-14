@@ -9,10 +9,22 @@ import java.sql.*;
 
 @Controller
 public class AccountPage {
-    private User user;
+    private static User user;
+
+    @RequestMapping(value = "/Account")
+    public String Account(Model model) {
+        if(user == null) {
+            return "redirect:/Account/login";
+        }
+        model.addAttribute("User", user);
+        return "Account";
+    }
 
     @GetMapping(value = "/Account/login")
     public String Login_Form(Model model) {
+        if(user == null) {
+            return "redirect:/locations";
+        }
         User UserLogin = new User();
         model.addAttribute("User", UserLogin);
         return "Login";
@@ -34,7 +46,7 @@ public class AccountPage {
             ps.setString(1, user1.getUsername());
             ps.setString(2, user1.getPassword());
             ResultSet rs = ps.executeQuery();
-            //
+
             rs.next();
             if(rs.getInt(1) == 0) {
                 return "redirect:/Account/login";
@@ -44,7 +56,7 @@ public class AccountPage {
             sql = "SELECT * FROM user WHERE Username = \"" + user1.getUsername() + "\" AND Password = \"" + user1.getPassword() + "\";";
             ResultSet user_Info = query.executeQuery(sql);
             if(user_Info.next()) {
-                this.user = User.getUserFromServer(user_Info);
+                user = User.getUserFromServer(user_Info);
             }
             return "redirect:/locations";
         } catch (SQLException e) {
@@ -58,4 +70,9 @@ public class AccountPage {
         System.out.println("The server has been pinged");
         return "redirect:/Account";
     }
+
+    public static User get_Current_User() {
+        return user;
+    }
+
 }
