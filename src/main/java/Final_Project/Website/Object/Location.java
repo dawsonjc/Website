@@ -1,40 +1,52 @@
 package Final_Project.Website.Object;
 import java.awt.image.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Location {
     private int LocationId;
     private String Location_Name;
     private String Status;
-    private Double Latitude;
-    private Double Longitude;
-    public void Set_Id(int locationId) {
+    private float Latitude;
+    private float Longitude;
+    public void setId(int locationId) {
         this.LocationId = locationId;
     }
-    public void Set_Location_name(String location_Name) {
+    public void setLocation_name(String location_Name) {
         this.Location_Name = location_Name;
     }
-    public void Set_Status(String status) {
+    public void setStatus(String status) {
         this.Status = status;
     }
-    public void Set_Latitude(Double latitude) {
+    public void setLatitude(float latitude) {
         this.Latitude = latitude;
     }
-    public void Set_Longitude(Double longitude) {
+    public void setLongitude(float longitude) {
         this.Longitude = longitude;
     }
 
-    public int Get_LocationId() {
+    public int getLocationId() {
         return this.LocationId;
     }
-    public String Get_Location_Name() {
+    public String getLocation_Name() {
         return this.Location_Name;
     }
-    public String Get_Status() {
+    public String getStatus() {
         return this.Status;
     }
-    public Double Get_Latitude() {
+    public float getLatitude() {
         return this.Latitude;
     }
-    public Double Get_Longitude() {
+    public float getLongitude() {
         return this.Longitude;
+    }
+
+    public static Location getLocationFromServer(ResultSet info) throws SQLException {
+        Location current_User = new Location();
+        current_User.Location_Name = info.getString(2);
+        current_User.Status = info.getString(3);
+        current_User.Latitude = info.getFloat(4);
+        current_User.Longitude = info.getFloat(5);
+        return current_User;
     }
 }

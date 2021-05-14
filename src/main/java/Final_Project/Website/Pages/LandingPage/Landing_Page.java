@@ -1,35 +1,48 @@
 package Final_Project.Website.Pages.LandingPage;
 
-import Final_Project.Website.Object.Location;
-import Final_Project.Website.WebsiteApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import Final_Project.Website.Object.User;
+import Final_Project.Website.Object.Location;
+import java.util.ArrayList;
 import java.sql.*;
 
 @Controller
+// @RequestMapping(value = "/locations")
 public class Landing_Page {
-
-    @RequestMapping(value = "/")
+    @GetMapping(value = "/locations")
     public String Table(Model model) {
-        String url = "jdbc:mysql://localhost:3306/clients";
-        String username = "root";
-        String password = "password";
+        final String url = "jdbc:mysql://localhost:3306/clients";
+        final String username = "root";
+        final String password = "password";
+
+        ArrayList<Location> locations = new ArrayList<>();
         try(Connection conn = DriverManager.getConnection(url, username, password)) {
-            System.out.println("Successful Connection");
-            model.addAttribute("Locations", User.getUsersFromServer(conn, "SELECT * FROM Users"));
+            Statement query = conn.createStatement();
+
+            String sql = "SELECT * FROM Locations";
+            ResultSet resultSet = query.executeQuery(sql);
+
+            // loop through result set and put it in the ArrayList
+            while(resultSet.next()) {
+                locations.add(Location.getLocationFromServer(resultSet));
+            }
+
+            // add variable to page
+            model.addAttribute("Locations", locations);
         } catch (SQLException e) {
-            System.out.println("MySQL server has not been implemented yet");
+            e.printStackTrace();
         }
 
         return "locations";
     }
 
-    @GetMapping(value = "/Login")
-    public String Login_Form(Model model) {
-        User user = new User();
-        model.addAttribute("User", user);
-        return "index";
+    @GetMapping(value = "locations/newLocation")
+    public String Location_Form(Model model) {
+        Location location = new Location();
+        model.addAttribute("Location", location);
+        return "New_Location";
     }
+
+
 }

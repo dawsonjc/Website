@@ -1,6 +1,5 @@
 package Final_Project.Website.Object;
 
-
 import java.sql.*;
 
 public class User {
@@ -12,9 +11,21 @@ public class User {
     private String Email;
     private String Type;
 
+    public User() {}
+    public User(int id, String first_Name, String last_Name, String password, String username, String email, String type) {
+        this.Id = id;
+        this.First_Name = first_Name;
+        this.Last_Name = last_Name;
+        this.Password = password;
+        this.Username = username;
+        this.Email = email;
+        this.Type = type;
+    }
+
     public void setId(int id) {
         this.Id = id;
     }
+
     public void setFirst_Name(String first_Name) {
         this.First_Name = first_Name;
     }
@@ -56,14 +67,15 @@ public class User {
         return this.Type;
     }
 
-    public static ResultSet getUsersFromServer(Connection conn, String SQL) {
-        try {
-            Statement statement = conn.createStatement();
-            return statement.executeQuery(SQL);
-        }
-        catch(SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public static User getUserFromServer(ResultSet info) throws SQLException {
+        User current_User = new User();
+        current_User.Id = info.getInt(1);
+        current_User.First_Name = info.getString(2);
+        current_User.Last_Name = info.getString(3);
+        current_User.Password = info.getString(4);
+        current_User.Username = info.getString(5);
+        current_User.Email = info.getString(6);
+        current_User.Type = info.getString(7);
+        return current_User;
     }
 }
