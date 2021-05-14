@@ -6,7 +6,10 @@
     <link rel="stylesheet" href="webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"/>
 </head>
 <body>
-<button type="button"><a href="/locations/newLocation">New Location</a></button>
+<div>
+    <button type="button" align="right"><a th:href="@{/Account/login}">Login</a></button>
+    <button type="button" align="left"><a th:href="@{/locations/newLocation}">New Location</a></button>
+</div>
 <table class="table table-bordered" style="width:100%;">
     <thead>
         <tr>
@@ -17,7 +20,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr th:each="{location : Locations.next()}">
+        <tr th:each="location : ${Locations}">
             <td></td>
             <td th:text="${location.getString(2)}">status</td>
             <td th:text="${location.getString(1)}">name</td>

@@ -3,8 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Dawson's Masks Status - Location Form</title>
+    <style>
+        .inputs {
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
-
+    <form method="POST" th:action="@{/locations/newLocation/submitLocation}" th:object="${Location}">
+        <div class="inputs">
+            <label for="location_Name">Location Name</label>
+            <input type="text" id="location_Name" placeholder="Location Name" th:field="*{Location_Name}">
+        </div>
+        <div class="inputs">
+            <label for="Status">Status</label>
+            <input id="Status" placeholder="Status" th:field="*{Status}">
+        </div>
+        <div><button type="submit">Submit</button></div>
+    </form>
 </body>
 </html>
