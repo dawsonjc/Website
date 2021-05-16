@@ -28,6 +28,7 @@ public class WebsiteApplication {
 		try(Connection conn = DriverManager.getConnection(url, username, password)) {
 			System.out.println("Successful Connection");
 		} catch (SQLException e) {
+			e.printStackTrace();
 			System.out.println("MySQL server has not been implemented yet");
 		}
 

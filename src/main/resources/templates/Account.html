@@ -10,7 +10,29 @@
 <p th:text="${User.getUsername()}"></p>
 <p th:text="${User.getPassword()}"></p>
 <form action="POST" >
-
+    <form method="POST" th:action="@{/Account/signUp/newUser}" th:object="${User}">
+        <div class="inputs">
+            <label for="first_Name">First Name</label>
+            <input type="text" id="first_Name" th:placeholder="${User.getFirst_Name()}" th:field="*{First_Name}">
+        </div>
+        <div class="inputs">
+            <label for="last_Name">Last Name</label>
+            <input id="last_Name" th:placeholder="${User.getLast_Name()}" th:field="*{Last_Name}">
+        </div>
+        <div class="inputs">
+            <label for="email">Email</label>
+            <input id="email" th:placeholder="${User.getEmail()}" th:field="*{Email}">
+        </div>
+        <div class="inputs">
+            <label for="username">Username</label>
+            <input id="username" th:placeholder="${User.getUsername()}" th:field="*{Username}">
+        </div>
+        <div class="inputs">
+            <label for="password">Password</label>
+            <input id="password" th:placeholder="${User.getPassword()}" th:field="*{Password}">
+        </div>
+        <div align="right"><button type="submit">Sign Up</button></div>
+    </form>
 
 </form>
 

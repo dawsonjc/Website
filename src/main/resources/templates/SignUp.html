@@ -2,7 +2,7 @@
 <html xmlns:th="http://ww.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dawson's Masks Status - Login</title>
+    <title>Dawson's Masks Status - Sign Up</title>
     <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}">
     <style>
         .inputs {
@@ -27,22 +27,34 @@
         <td>
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Log In</a>
+                    <a class="nav-link" th:href="@{/Account/login}">Log In</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/Account/signUp}">Sign Up</a>
+                    <a class="nav-link active" aria-current="page" href="#">Sign Up</a>
                 </li>
             </ul>
-            <form method="POST" th:action="@{/Account/user}" th:object="${User}">
+            <form method="POST" th:action="@{/Account/signUp/newUser}" th:object="${User}">
+                <div class="inputs">
+                    <label for="first_Name">First Name</label>
+                    <input type="text" id="first_Name" placeholder="First Name" th:field="*{First_Name}">
+                </div>
+                <div class="inputs">
+                    <label for="last_Name">Last Name</label>
+                    <input id="last_Name" placeholder="Last Name" th:field="*{Last_Name}">
+                </div>
+                <div class="inputs">
+                    <label for="email">Email</label>
+                    <input id="email" placeholder="Email" th:field="*{Email}">
+                </div>
                 <div class="inputs">
                     <label for="username">Username</label>
-                    <input type="text" id="username" placeholder="Username" th:field="*{Username}">
+                    <input id="username" placeholder="Username" th:field="*{Username}">
                 </div>
                 <div class="inputs">
                     <label for="password">Password</label>
                     <input id="password" type="password" placeholder="password" th:field="*{Password}">
                 </div>
-                <div align="right"><button type="submit">Log In</button></div>
+                <div align="right"><button type="submit">Sign Up</button></div>
             </form>
         </td>
     </tr>

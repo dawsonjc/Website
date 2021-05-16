@@ -78,4 +78,25 @@ public class User {
         current_User.Type = info.getString(7);
         return current_User;
     }
+
+    public static boolean Is_User_Information_Filled(User user) throws SQLException {
+        // Check if any of the input values are either null or empty
+        if(user.First_Name == null || user.First_Name.isEmpty()) {
+            return false;
+        }
+        if(user.Last_Name == null || user.Last_Name.isEmpty()) {
+            return false;
+        }
+        if(user.Username == null || user.Username.isEmpty()) {
+            return false;
+        }
+        if(user.Email == null || user.Email.isEmpty()) {
+            return false;
+        }
+        if(user.Password == null || user.Password.isEmpty()) {
+            return false;
+        }
+        // Each value is not null or empty
+        return true;
+    }
 }

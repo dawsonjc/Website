@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script th:inline="javascript">
+        // literally upon page load up redirect
         window.onload = function() {
-            // similar behavior as clicking on a link
             window.location.href = [[@{/locations}]];
         }
     </script>
