@@ -12,7 +12,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.sql.*;
-
 @SpringBootApplication
 public class WebsiteApplication {
 	@RequestMapping(value = "/")
@@ -26,7 +25,7 @@ public class WebsiteApplication {
 		final String username = "root";
 		final String password = "password";
 		try(Connection conn = DriverManager.getConnection(url, username, password)) {
-			System.out.println("Successful Connection");
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("MySQL server has not been implemented yet");

@@ -1,34 +1,52 @@
 <!DOCTYPE html>
-<html xmlns:th="http://ww.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Dawson's Masks Status</title>
-    <link rel="stylesheet" href="webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}" />
 </head>
 <body>
-<div>
-    <button type="button" align="right"><a th:href="@{/Account/login}">Login</a></button>
-    <button type="button" align="left"><a th:href="@{/locations/newLocation}">New Location</a></button>
-</div>
-<table class="table table-bordered" style="width:100%;">
-    <thead>
-        <tr>
-            <td>Logo</td>
-            <td>Name</td>
-            <td>Status</td>
-            <td>Longitude, Latitude</td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr th:each="location : ${Locations}">
-            <td></td>
-            <td th:text="${location.getString(2)}">status</td>
-            <td th:text="${location.getString(1)}">name</td>
-            <td th:text="${location.getString(3)}, ${location.getString(4)}"></td>
-            <!--<td>Google map</td>-->
-        </tr>
-    </tbody>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/Account/login}">Login</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/locations}">Locations</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/Account}">Account information</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <a type="button" class="btn btn-primary" th:href="@{/locations/newLocation}">New Location</a>
+    <table class="table table-bordered" style="width:100%;">
+        <thead>
+            <tr>
+                <td>Logo</td>
+                <td>Name</td>
+                <td>Status</td>
+                <td>Longitude, Latitude</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="location : ${Locations}">
+                <td></td>
+                <td th:text="${location.getLocation_Status()}">status</td>
+                <td th:text="${location.getLocation_Name()}">name</td>
+                <td th:text="${location. + '' + ${location.getString(4)}"></td>
+                <!--<td>Google map</td>-->
+            </tr>
+        </tbody>
 
-</table>
+    </table>
+    <script th:src="@{https://code.jquery.com/jquery-3.2.1.slim.min.js}"></script>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js}"></script>
+    <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
 </body>
 </html>

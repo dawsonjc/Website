@@ -25,7 +25,6 @@ public class User {
     public void setId(int id) {
         this.Id = id;
     }
-
     public void setFirst_Name(String first_Name) {
         this.First_Name = first_Name;
     }
@@ -79,7 +78,7 @@ public class User {
         return current_User;
     }
 
-    public static boolean Is_User_Information_Filled(User user) throws SQLException {
+    public static boolean Is_User_Information_Filled(User user) {
         // Check if any of the input values are either null or empty
         if(user.First_Name == null || user.First_Name.isEmpty()) {
             return false;
