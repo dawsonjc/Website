@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dawson's Masks Status - Account</title>
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/Account/login}">Login</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/locations}">Locations</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/Account}">Account information</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <p th:text="'Name: ' + ${Current_User.getFirst_Name()} + ' ' + ${Current_User.getLast_Name()}"></p>
+    <p th:text="'Email: ' + ${Current_User.getEmail()}"></p>
+    <p th:text="'Username: ' + ${Current_User.getUsername()}"></p>
+    <p th:text="'Password: ' + ${Current_User.getPassword()}"></p>
+    <form method="POST" th:action="@{/Account/updateUser}" th:object="${Update_User}">
+        <div class="inputs">
+            <label for="first_Name">First Name</label>
+            <input type="text" id="first_Name" th:placeholder="${Current_User.getFirst_Name()}" th:field="*{First_Name}">
+        </div>
+        <div class="inputs">
+            <label for="last_Name">Last Name</label>
+            <input id="last_Name" th:placeholder="${Current_User.getLast_Name()}" th:field="*{Last_Name}">
+        </div>
+        <div class="inputs">
+            <label for="email">Email</label>
+            <input id="email" th:placeholder="${Current_User.getEmail()}" th:field="*{Email}">
+        </div>
+        <div class="inputs">
+            <label for="username">Username</label>
+            <input id="username" th:placeholder="${Current_User.getUsername()}" th:field="*{Username}">
+        </div>
+        <div class="inputs">
+            <label for="password">Password</label>
+            <input id="password" th:placeholder="${Current_User.getPassword()}" th:field="*{Password}">
+        </div>
+        <div align="left"><button type="submit" class="btn btn-success">Update Account</button></div>
+    </form>
+    <script th:src="@{https://code.jquery.com/jquery-3.2.1.slim.min.js}"></script>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js}"></script>
+    <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+</body>
+</html>

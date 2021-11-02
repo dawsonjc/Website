@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dawson's Masks Status</title>
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}" />
+    <script type="text/javascript" th:src="@{https://code.jquery.com/jquery-latest.min.js}"></script>
+    <style>
+        tbody tr {
+            height: 500px;
+        }
+    </style>
+    <script type="text/javascript" th:src="@{/js/AccountButton.js}"></script>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active" id="login-signup">
+                    <a class="nav-link" th:href="@{/Account/login}">Login</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/locations}">Locations</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/Account}">Account information</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <a type="button" class="btn btn-primary" th:href="@{/locations/newLocation}">New Location</a>
+    <table class="table table-bordered" style="width:100%;">
+        <thead>
+            <tr>
+                <td>Logo</td>
+                <td>Status</td>
+                <td>Name</td>
+                <td>Map location</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="location, location_Stat : ${Locations}">
+                <td></td>
+                <td th:text="${location.getLocation_Status()}">status</td>
+                <td th:text="${location.getLocation_Name()}">name</td>
+                <td th:id="'Id-' + ${location_Stat.index}" th:text="${location.getLongitude()} + ' ' + ${location.getLatitude()}"></td>
+                <script th:inline="javascript">
+                    $(document).ready(function() {
+                        var index = [[${location_Stat.index}]];
+                        var latitude = [[${location.getLatitude()}]];
+                        var longitude = [[${location.getLongitude()}]];
+                        var map;
+                        map = new google.maps.Map(document.getElementById(`Id-${index}`) , {
+                            center: { lat: latitude, lng: longitude },
+                            zoom: 16
+                        });
+                        let marker = new google.maps.Marker({
+                            position: { lat: latitude, lng: longitude },
+                            map: map
+                        });
+                    })
+                </script>
+                <!--<td>Google map</td>-->
+            </tr>
+        </tbody>
+    </table>
+    <script th:src="@{https://code.jquery.com/jquery-3.2.1.slim.min.js}"></script>
+    <script th:src="@{https://maps.googleapis.com/maps/api/js?key=AIzaSyBCyZlciOj_r_xJJ7Y3SeaIHvo5-yvXs-4}"></script>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js}"></script>
+    <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+</body>
+</html>

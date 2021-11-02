@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dawson's Masks Status - Sign Up</title>
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}">
+    <style>
+        .inputs {
+            padding: 10px;
+        }
+        .login_Box {
+            width:300px;
+            height:300px;
+            position:fixed;
+            margin-left:-150px; /* half of width */
+            margin-top:-150px;  /* half of height */
+            top:50%;
+            left:50%;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/Account/login}">Login</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/locations}">Locations</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/Account}">Account information</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <table border="1" class="login_Box">
+        <tbody>
+        <tr>
+            <td>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/Account/login}">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Sign Up</a>
+                    </li>
+                </ul>
+                <form method="POST" th:action="@{/Account/signUp/newUser}" th:object="${User}">
+                    <div class="inputs">
+                        <label for="first_Name">First Name</label>
+                        <input type="text" id="first_Name" placeholder="First Name" th:field="*{First_Name}"/>
+                    </div>
+                    <div class="inputs">
+                        <label for="last_Name">Last Name</label>
+                        <input id="last_Name" placeholder="Last Name" th:field="*{Last_Name}">
+                    </div>
+                    <div class="inputs">
+                        <label for="email">Email</label>
+                        <input id="email" placeholder="Email" th:field="*{Email}">
+                    </div>
+                    <div class="inputs">
+                        <label for="username">Username</label>
+                        <input id="username" placeholder="Username" th:field="*{Username}">
+                    </div>
+                    <div class="inputs">
+                        <label for="password">Password</label>
+                        <input id="password" type="password" placeholder="password" th:field="*{Password}">
+                    </div>
+                    <div align="right"><button type="submit" class="btn btn-success">Sign Up</button></div>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <script th:src="@{https://code.jquery.com/jquery-3.2.1.slim.min.js}"></script>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js}"></script>
+    <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+</body>
+</html>
