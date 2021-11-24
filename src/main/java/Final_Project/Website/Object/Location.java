@@ -1,7 +1,16 @@
 package Final_Project.Website.Object;
+import org.jetbrains.annotations.NotNull;
+
 import java.awt.image.*;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Locale;
+import java.util.Random;
 
 public class Location {
     private int LocationId;
@@ -16,8 +25,8 @@ public class Location {
     private String City;
     private String Country;
     private String Zip;
-    private float Latitude;
-    private float Longitude;
+    private double Latitude;
+    private double Longitude;
 
     public void setId(int locationId) {
         this.LocationId = locationId;
@@ -25,7 +34,7 @@ public class Location {
     public void setStatus(String status) {
         this.Status = status;
     }
-    public void setLocation_name(String location_Name) {
+    public void setLocation_Name(String location_Name) {
         this.Location_Name = location_Name;
     }
     public void setLocation_Status(String location_Status) {
@@ -43,10 +52,10 @@ public class Location {
     public void setZip(String zip) {
         this.Zip = zip;
     }
-    public void setLatitude(float latitude) {
+    public void setLatitude(double latitude) {
         this.Latitude = latitude;
     }
-    public void setLongitude(float longitude) {
+    public void setLongitude(double longitude) {
         this.Longitude = longitude;
     }
 
@@ -74,10 +83,10 @@ public class Location {
     public String getZip() {
         return this.Zip;
     }
-    public float getLatitude() {
+    public double getLatitude() {
         return this.Latitude;
     }
-    public float getLongitude() {
+    public double getLongitude() {
         return this.Longitude;
     }
 
@@ -95,11 +104,19 @@ public class Location {
         return location;
     }
 
-    public static boolean Is_Location_Information_Filled(Location location) {
-        // Check if any of the input values are either null or empty
-        if(location.Status == null || location.Status.isEmpty()) {
-            return false;
+    public static String encode_Address(Location location) {
+        String address = location.Address + " " + location.City + " " + location.Country;
+        try {
+            return URLEncoder.encode(address, StandardCharsets.UTF_8.toString());
         }
+        catch(UnsupportedEncodingException e) {
+            return "24%20Sussex%20Drive%20Ottawa%20ON";
+        }
+    }
+
+
+    public static boolean Is_Location_Information_Filled(@NotNull Location location) {
+        // Check if any of the input values are either null or empty
         if(location.Location_Name == null || location.Location_Name.isEmpty()) {
             return false;
         }

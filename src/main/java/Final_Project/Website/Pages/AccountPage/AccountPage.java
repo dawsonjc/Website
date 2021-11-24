@@ -1,22 +1,27 @@
 package Final_Project.Website.Pages.AccountPage;
 
 import Final_Project.Website.Object.User;
+import Final_Project.Website.Pages.LandingPage.API;
+import Final_Project.Website.WebsiteApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import java.sql.*;
+import java.util.Arrays;
 
 @Controller
 public class AccountPage {
-    private static User user;
-
+    private User user = new User();
     @RequestMapping(value = "/Account")
     public String Account(Model model) {
-        if(user == null) {
+        // fix
+        if(false) {
             return "redirect:/Account/login";
         }
-        model.addAttribute("Current_User", user);
+        System.out.println();
+        model.addAttribute("Current_User", this.user);
         model.addAttribute("Update_User", new User());
         return "Account";
     }
@@ -39,21 +44,20 @@ public class AccountPage {
             ps.setString(3, updated_User.getPassword());
             ps.setString(4, updated_User.getUsername());
             ps.setString(5, updated_User.getEmail());
-            ps.setInt(6, user.getId());
+            ps.setInt(6, this.user.getId());
 
             ps.execute();
         }
         catch(SQLException e) {
             e.printStackTrace();
         }
-        user = updated_User;
-        return "redirect:/locations";
+        return "redirect:/locations/";
     }
 
     @GetMapping(value = "/Account/login")
     public String Login_Form(Model model) {
-        if(user != null) {
-            return "redirect:/locations";
+        if(this.user != null) {
+            return "redirect:/locations/";
         }
         User UserLogin = new User();
         model.addAttribute("User", UserLogin);
@@ -83,22 +87,23 @@ public class AccountPage {
             }
 
             // user exists and now to link user to user object
-            sql = "SELECT * FROM client WHERE Username = \"" + user1.getUsername() + "\" AND Password = \"" + user1.getPassword() + "\";";
+            sql = "SELECT * FROM client WHERE Username = '" + user1.getUsername() + "' AND Password = '" + user1.getPassword() + "';";
             ResultSet user_Info = query.executeQuery(sql);
             if(user_Info.next()) {
-                user = User.getUserFromServer(user_Info);
+                this.user = User.getUserFromServer(user_Info);
             }
             return "redirect:/locations";
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
+        //javax.servlet.http.Cookie cookie = new Cookie("why", "tell me why");
     }
 
     @GetMapping(value="/Account/signUp")
     public String signUpPage(Model model) {
         if(user != null) {
-            return "redirect:/locations";
+            return "redirect:/locations/";
         }
         User UserLogin = new User();
         model.addAttribute("User", UserLogin);
@@ -120,36 +125,33 @@ public class AccountPage {
 
             // insert new user into database
             String sql = "INSERT INTO client (First_Name, Last_Name, Password, Username, Email, Type) " +
-                    "VALUES(?, ?, ?, ?, ?, \"User\");";
+                    "VALUES(?, ?, ?, ?, ?, 'User');";
             PreparedStatement query = conn.prepareStatement(sql);
-            query.setString(1, user1.getFirst_Name());
-            query.setString(2, user1.getLast_Name());
-            query.setString(3, user1.getPassword());
-            query.setString(4, user1.getUsername());
-            query.setString(5, user1.getEmail());
-            query.execute();
 
+            String[] inserts = new String[] {
+                    user1.getFirst_Name(),
+                    user1.getLast_Name(),
+                    user1.getPassword(),
+                    user1.getUsername(),
+                    user1.getEmail()
+            };
+
+            API.insert_Into_Table(query, inserts, 1, 2, 3, 4, 5);
+            query.execute();
 
             // set id to user
             sql = "SELECT * FROM client WHERE Username = ? AND Password = ?;";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, user1.getUsername());
-            ps.setString(2, user1.getPassword());
-            ResultSet rs = ps.executeQuery();
-            if(rs.next()) {
-                // set class variable
-                user = User.getUserFromServer(rs);
-            }
-
-
+            inserts = new String[] {
+                    user1.getUsername(),
+                    user1.getPassword()
+            };
+            API.insert_Into_Table(ps, inserts, 1, 2);
+            ps.executeQuery();
         } catch(SQLException e) {
             e.printStackTrace();
         }
-        return "redirect:/locations";
-    }
 
-    public static User get_Current_User() {
-        return user;
+        return "redirect:/locations/";
     }
-
 }

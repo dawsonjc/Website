@@ -3,6 +3,7 @@ package Final_Project.Website.Object;
 import java.sql.*;
 
 public class User {
+
     private int Id;
     private String First_Name;
     private String Last_Name;
@@ -97,5 +98,14 @@ public class User {
         }
         // Each value is not null or empty
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "First_Name: " + this.First_Name +
+               "\nLast_Name: " + this.Last_Name +
+               "\nUsername: " + this.Username +
+               "\nEmail: " + this.Email +
+               "\nPassword: " + this.Password;
     }
 }
